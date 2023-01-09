@@ -1,0 +1,33 @@
+{
+  "name": "latinasub",
+  "version": "0.0.1",
+  "description": "Free subscription nodes but stored on sqlite",
+  "main": "app/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.com:latinahub/latinasub.git"
+  },
+  "author": "dickymuliafiqri",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://gitlab.com/latinahub/latinaapi/-/issues"
+  },
+  "dependencies": {
+    "country-code-emoji": "^2.3.0",
+    "find-process": "^1.4.7",
+    "grammy": "^1.13.0",
+    "is-ip": "^5.0.0",
+    "js-base64": "^3.7.3",
+    "node-fetch": "^3.3.0",
+    "socks-proxy-agent": "^7.0.0",
+    "sqlite3": "^5.1.3",
+    "typescript": "^4.9.4"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.13"
+  },
+  "type": "module"
+}

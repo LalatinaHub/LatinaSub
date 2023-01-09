@@ -1,0 +1,4 @@
+{
+  "cdn": ["main.millionaireaisle.com"],
+  "sni": ["config.teams.microsoft.com"]
+}
