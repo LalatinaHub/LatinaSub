@@ -22,7 +22,7 @@ class Main {
   private configUrls: string[] = [];
   private connectCount: number = 0;
   private maxConcurrentTest: number = 50;
-  private maxResult: number = 10000;
+  private maxResult: number = 50;
   private numberOfTest: number = 2;
   private fishermanObjects: FishermanType[] = [];
 
