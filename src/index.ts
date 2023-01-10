@@ -69,7 +69,7 @@ class Main {
               .connect(account.toSingBox(true, mode as "cdn" | "sni"))
               .then(async (res) => {
                 if (res.error) {
-                  logger.log(LogLevel.error, `[${account.config.vpn}] ${account.config.remark} -> ${res.message}`);
+                  // logger.log(LogLevel.error, `[${account.config.vpn}] ${account.config.remark} -> ${res.message}`);
                   return;
                 }
 
