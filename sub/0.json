@@ -1,0 +1,34 @@
+[
+  {
+    "id": 0,
+    "remarks": "rxsweet/getAirport",
+    "site": "https://github.com/rxsweet/getAirport",
+    "url": "https://raw.githubusercontent.com/rxsweet/getAirport/main/sub/miningUrl|https://raw.githubusercontent.com/rxsweet/getAirport/main/sub/free/goodfree/goodfree|https://raw.githubusercontent.com/rxsweet/getAirport/main/sub/free/fastestcloud.xyz|https://raw.githubusercontent.com/rxsweet/getAirport/main/sub/free/feiniaoyun.top|https://raw.githubusercontent.com/rxsweet/getAirport/main/sub/free/gflink.net|https://raw.githubusercontent.com/rxsweet/getAirport/main/sub/free/maossr.top|https://raw.githubusercontent.com/rxsweet/getAirport/main/sub/free/www.dgycom.com|https://raw.githubusercontent.com/rxsweet/getAirport/main/sub/free/www.iacgbt.com|https://raw.githubusercontent.com/rxsweet/getAirport/main/sub/free/www.jcbb.top",
+    "update_method": "auto",
+    "enabled": true
+  },
+  {
+    "id": 1,
+    "remarks": "w1770946466/Auto_proxy",
+    "site": "https://github.com/w1770946466/Auto_proxy",
+    "url": "https://raw.githubusercontent.com/w1770946466/Auto_proxy/main/Long_term_subscription_num",
+    "update_method": "auto",
+    "enabled": true
+  },
+  {
+    "id": 2,
+    "remarks": "mahdibland/ShadowsocksAggregator",
+    "site": "https://github.com/mahdibland/ShadowsocksAggregator",
+    "url": "https://raw.githubusercontent.com/mahdibland/SSAggregator/master/sub/sub_merge_base64.txt|https://raw.githubusercontent.com/mahdibland/SSAggregator/master/sub/airport_merge_base64.txt",
+    "update_method": "auto",
+    "enabled": true
+  },
+  {
+    "id": 3,
+    "remarks": "paimonhub/Paimonnode",
+    "site": "https://github.com/paimonhub/Paimonnode",
+    "url": "https://raw.githubusercontent.com/paimonhub/Paimonnode/main/clash.yaml|https://raw.githubusercontent.com/paimonhub/Paimonnode/main/nodelist.txt",
+    "update_method": "auto",
+    "enabled": true
+  }
+]
