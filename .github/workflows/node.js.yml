@@ -14,8 +14,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Get secrets
-        - run: |
-            echo ${{ secrets.BOT_TOKEN }} > ./bot_token
+        run: |
+          echo ${{ secrets.BOT_TOKEN }} > ./bot_token
       - name: Use Node.js 18
         uses: actions/setup-node@v3
         with:
