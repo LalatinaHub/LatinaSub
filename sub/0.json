@@ -30,5 +30,21 @@
     "url": "https://raw.githubusercontent.com/paimonhub/Paimonnode/main/clash.yaml|https://raw.githubusercontent.com/paimonhub/Paimonnode/main/nodelist.txt",
     "update_method": "auto",
     "enabled": true
+  },
+  {
+    "id": 4,
+    "remarks": "mheidari98/.proxy",
+    "site": "https://github.com/mheidari98/.proxy",
+    "url": "https://raw.githubusercontent.com/mheidari98/.proxy/main/all",
+    "update_method": "auto",
+    "enabled": true
+  },
+  {
+    "id": 5,
+    "remarks": "mehdimoghaddam-cell/Server_List",
+    "site": "https://github.com/mehdimoghaddam-cell/Server_List",
+    "url": "https://raw.githubusercontent.com/mehdimoghaddam-cell/Server_List/main/Server_List.txt",
+    "update_method": "auto",
+    "enabled": true
   }
 ]
