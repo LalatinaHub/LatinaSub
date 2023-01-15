@@ -31,7 +31,7 @@ class Bot {
     message += `SNI: <code>${account.sni || account.host || ""}</code>\n\n`;
     message += "Origin:\n";
     message += `⌜<code>${fisherman.url}</code>⌟\n\n`;
-    message += `Repo: <a href="https://github.com/LatinaHub/LatinaSub">Open repo</a>\n`;
+    message += `Repo: <a href="https://github.com/LalatinaHub">Github</a>\n`;
     message += `API: <a href="http://fool.azurewebsites.net">Get subs</a>\n`;
     message += `Join: @v2scrape\n\n`;
     message += `Contact: @d_fordlalatina`;
