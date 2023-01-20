@@ -4,7 +4,7 @@ import fetch from "node-fetch";
 import { logger, LogLevel } from "./logger.mjs";
 
 const subUrlList = [
-  "https://raw.githubusercontent.com/LatinaHub/TgNodeScraper/main/result/subs.json",
+  "https://raw.githubusercontent.com/LalatinaHub/Mineral/master/result/sub.json",
   "https://raw.githubusercontent.com/mahdibland/ShadowsocksAggregator/master/sub/sub_list.json",
   "https://raw.githubusercontent.com/paimonhub/Paimonnode/main/sublist.txt",
 ];
