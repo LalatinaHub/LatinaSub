@@ -46,7 +46,7 @@ class Main {
 
       this.configUrls = [];
       this.connectCount = 0;
-      this.maxConcurrentTest = Math.round((configUrls.length / 100) / 2);
+      this.maxConcurrentTest = Math.round(configUrls.length / 100 / 2);
       if (this.maxConcurrentTest < 50) this.maxConcurrentTest = 50;
 
       logger.log(LogLevel.info, `Start test number: ${i}`);
@@ -59,11 +59,18 @@ class Main {
           new Promise(async (resolve) => {
             const account = new Fisherman(configUrl);
 
-            // account.config.tls = "tls";
-            // account.config.skipCertVerify = true;
-            // if (account.config.port == 80) {
-            //   account.config.port = 443;
-            // }
+            if (configUrl.startsWith("ssr")) {
+              account.config.network = "OBFS";
+            }
+
+            switch (account.config.network.toLowerCase()) {
+              case "tcp":
+              case "ws":
+              case "grpc":
+                break;
+              default:
+                account.config.network = "tcp";
+            }
 
             await connect
               .connect(account.toSingBox(true, mode as "cdn" | "sni"))

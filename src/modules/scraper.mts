@@ -109,7 +109,7 @@ class Scraper {
         resolve(0);
       });
 
-      if (onScrape.length >= 5) {
+      if (onScrape.length >= 20) {
         await sleep(1000);
       }
     }
