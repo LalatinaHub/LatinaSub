@@ -11,12 +11,12 @@ class Bot {
     const account = fisherman.account;
 
     let message: string = "";
-    message += "---------------------------\n";
+    message += "--------------------------------\n";
     message += "Akun Gratis | Free Accounts\n";
-    message += "---------------------------\n";
+    message += "--------------------------------\n";
     message += `Jumlah/Count: ${total} 🌸\n`;
     message += `Regional/Region: ${account.region} ${account.cc} ${countryCodeEmoji(account.cc as string)}\n`;
-    message += "---------------------------\n";
+    message += "--------------------------------\n";
     message += "Info:\n";
     message += `Type: <code>${account.vpn}</code>\n`;
     message += `Remark: <code>${account.remark}</code>\n`;
@@ -33,6 +33,7 @@ class Bot {
     message += `⌜<code>${fisherman.url}</code>⌟\n\n`;
     message += `Repo: <a href="https://github.com/LalatinaHub">Github</a>\n`;
     message += `API: <a href="http://fool.azurewebsites.net">Get subs</a>\n`;
+    message += `Docs: <a href="https://latinadocs.vercel.app">Read Docs</a>\n`;
     message += `Join: @v2scrape\n\n`;
     message += `Contact: @d_fordlalatina`;
 
@@ -45,11 +46,6 @@ class Bot {
     await this.bot.api.sendMessage(this.channelId, message, {
       disable_web_page_preview: true,
       parse_mode: "HTML",
-      reply_markup: new InlineKeyboard()
-        .url("❤️ Donate ❤️", "https://saweria.co/m0qa")
-        .row()
-        .url("Donators", "https://telegra.ph/Donations-11-05-4")
-        .row(),
     });
   }
 }

@@ -63,18 +63,14 @@ class Main {
               account.config.network = "OBFS";
             }
 
-            if (account.config.network) {
-              switch (account.config.network.toLowerCase()) {
-                case "tcp":
-                case "ws":
-                case "grpc":
-                case "obfs"
-                  break;
-                default:
-                  account.config.network = "tcp";
-              }
-            } else {
-              account.config.network = "tcp";
+            account.config.network = account.config.network?.toLowerCase();
+            switch (account.config.network) {
+              case "ws":
+              case "grpc":
+              case "obfs":
+                break;
+              default:
+                account.config.network = "tcp";
             }
 
             await connect
