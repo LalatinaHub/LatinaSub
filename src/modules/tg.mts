@@ -32,8 +32,7 @@ class Bot {
     message += "Origin:\n";
     message += `⌜<code>${fisherman.url}</code>⌟\n\n`;
     message += `Repo: <a href="https://github.com/LalatinaHub">Github</a>\n`;
-    message += `API: <a href="http://fool.azurewebsites.net">Get subs</a>\n`;
-    message += `Docs: <a href="https://latinadocs.vercel.app">Read Docs</a>\n`;
+    message += `Docs: <a href="https://fool.azurewebsites.net">Read docs</a>\n`;
     message += `Join: @v2scrape\n\n`;
     message += `Contact: @d_fordlalatina`;
 
