@@ -59,10 +59,12 @@ class Main {
           new Promise(async (resolve) => {
             const account = new Fisherman(configUrl);
 
+            // Override config
             if (configUrl.startsWith("ssr")) {
               account.config.network = "OBFS";
             }
 
+            account.config.skipCertVerify = true;
             account.config.network = account.config.network?.toLowerCase();
             switch (account.config.network) {
               case "ws":
