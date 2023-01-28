@@ -68,6 +68,8 @@ class Main {
             account.config.network = account.config.network?.toLowerCase();
             switch (account.config.network) {
               case "ws":
+                if (!account.config.path) account.config.path = "/";
+                break;
               case "grpc":
               case "obfs":
                 break;
