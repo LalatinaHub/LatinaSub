@@ -145,7 +145,7 @@ class SSR {
       return {
         vpn: "ssr",
         address: config.hostname,
-        port: parseInt(`${config.port}`) || 443,
+        port: parseInt(`${config.port}`),
         obfs: config.query.obfs?.match(/(plain|random)/) ? "http_simple" : config.query.obfs,
         obfsParam: config.query.obfsparam || "",
         proto: config.query.protocol || "origin",
