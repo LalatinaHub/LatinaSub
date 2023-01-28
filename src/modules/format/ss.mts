@@ -49,10 +49,11 @@ class SS {
   }
 
   async isExists() {
-    const { address, port, id } = this.account;
+    const { address, port, id, plugin } = this.account;
     const conn = await db.connect();
 
-    const query = `SELECT * FROM SS WHERE ADDRESS='${address}' AND PORT=${port} AND PASSWORD='${id}'`;
+    let query = `SELECT * FROM SS WHERE ADDRESS='${address}' AND PORT=${port} AND PASSWORD='${id}'`;
+    if (plugin) query += ` AND PLUGIN="${plugin}"`;
 
     return await new Promise((resolve, reject) => {
       conn.get(query, (err: Error, row: any) => {
