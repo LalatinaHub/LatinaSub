@@ -1,7 +1,7 @@
 import { logger, LogLevel } from "./logger.mjs";
 import { parse, UrlWithParsedQuery } from "url";
 import { decode, encode } from "js-base64";
-import { SSRInterface } from "../utils/types.mjs";
+import { SSRInterface, SSInterface } from "../utils/types.mjs";
 import findProcess from "find-process";
 import stripAnsi from "strip-ansi";
 
@@ -62,6 +62,30 @@ function ssrParser(ssr: string): SSRInterface {
   return parsedSsr as SSRInterface;
 }
 
+function ssParser(ss: string): SSInterface {
+  if (!ss.match("@")) {
+    const encodedAuth = ss.match(/:\/\/([\w+\/\+\=]+)/);
+    if (encodedAuth && encodedAuth[1]) {
+      const authInfo = decode(encodedAuth[1]).split("@");
+      const serverInfo = authInfo.pop();
+      ss = ss.replace(encodedAuth[1], `${encode(authInfo.join("@"))}@${serverInfo}`);
+    }
+  }
+
+  ss = decodeURIComponent(ss).replace(/;/g, "&");
+
+  let parsedUrl = parse(ss, true);
+  const [method, password] = decode(parsedUrl.auth || "bm90OmZvdW5k").split(":");
+
+  parsedUrl.query = {
+    ...parsedUrl.query,
+    method,
+    password,
+  };
+
+  return parsedUrl as SSInterface;
+}
+
 function unchalk(text: string | string[]): string {
   let result: string[] = [];
   if (Array.isArray(text)) {
@@ -75,4 +99,4 @@ function unchalk(text: string | string[]): string {
   }
 }
 
-export { sleep, base64Decode, base64Encode, urlParser, isRunning, ssrParser };
+export { sleep, base64Decode, base64Encode, urlParser, isRunning, ssrParser, ssParser };

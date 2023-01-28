@@ -1,4 +1,4 @@
-export const acceptedType: string[] = ["vless", "vmess", "trojan", "ssr"];
+export const acceptedType: string[] = ["vless", "vmess", "trojan", "ssr", "ss"];
 export const excludedType: string[] = ["https", "http"];
 export const pattern: RegExp = new RegExp(`(?!${excludedType.join("|")})(${acceptedType.join("|")}):\/\/.+`, "gim");
 export const path: string = process.cwd();

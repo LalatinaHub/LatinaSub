@@ -1,9 +1,10 @@
 import { db } from "../db.mjs";
 import { logger, LogLevel } from "../logger.mjs";
 import { V2Object } from "../../utils/types.mjs";
-import { urlParser } from "../helper.mjs";
+import { ssParser } from "../helper.mjs";
+import { SSInterface } from "../../utils/types.mjs";
 
-class Trojan {
+class SS {
   account: V2Object;
   url: string;
 
@@ -17,35 +18,27 @@ class Trojan {
 
     return await new Promise((resolve, reject) => {
       conn.run(
-        `CREATE TABLE IF NOT EXISTS Trojan (
+        `CREATE TABLE IF NOT EXISTS SS (
                 ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
                 PASSWORD VARCHAR NOT NULL,
                 ADDRESS VARCHAR NOT NULL,
                 PORT INTEGER NOT NULL ON CONFLICT REPLACE DEFAULT 443,
-                SECURITY VARCHAR NOT NULL ON CONFLICT REPLACE DEFAULT 'tls',
-                FLOW VARCHAR,
-                LEVEL INTEGER NOT NULL ON CONFLICT REPLACE DEFAULT 8,
-                METHOD VARCHAR NOT NULL ON CONFLICT REPLACE DEFAULT 'chacha20-poly1305',
-                OTA BOOLEAN NOT NULL ON CONFLICT REPLACE DEFAULT 0,
-                HOST VARCHAR,
-                TYPE VARCHAR,
+                METHOD CARCHAR,
+                PLUGIN VARCHAR,
                 PATH VARCHAR,
-                SERVICE_NAME VARCHAR,
-                MODE VARCHAR,
-                ALLOW_INSECURE BOOLEAN NOT NULL ON CONFLICT REPLACE DEFAULT 1,
-                SNI VARCHAR,
+                HOST VARCHAR,
+                TLS VARCHAR,
                 REMARK VARCHAR,
-                IS_CDN BOOLEAN,
                 CC VARCHAR,
                 REGION VARCHAR,
-                VPN VARCHAR NOT NULL ON CONFLICT REPLACE DEFAULT 'trojan'
+                VPN VARCHAR NOT NULL ON CONFLICT REPLACE DEFAULT 'ss'
             );`,
         (err: Error) => {
           if (err) {
             logger.log(LogLevel.error, `[${this.account.vpn}] ${err.message}`);
             reject();
           } else {
-            logger.log(LogLevel.success, "[DB] Trojan table successfully created!");
+            logger.log(LogLevel.success, "[DB] SS table successfully created!");
             resolve(0);
           }
         }
@@ -56,15 +49,10 @@ class Trojan {
   }
 
   async isExists() {
-    const { network, port, id, path, cdn, serviceName, mode } = this.account;
+    const { address, port, id } = this.account;
     const conn = await db.connect();
 
-    let query = `SELECT * FROM Trojan WHERE PORT=${port} AND PASSWORD='${id}' AND IS_CDN=${
-      cdn ? 1 : 0
-    } AND TYPE='${network}'`;
-    if (path) query += ` AND PATH='${path}'`;
-    if (serviceName) query += ` AND SERVICE_NAME='${serviceName}'`;
-    if (mode) query += ` AND MODE='${mode}'`;
+    const query = `SELECT * FROM SS WHERE ADDRESS='${address}' AND PORT=${port} AND PASSWORD='${id}'`;
 
     return await new Promise((resolve, reject) => {
       conn.get(query, (err: Error, row: any) => {
@@ -89,47 +77,31 @@ class Trojan {
       return 2;
     }
 
-    let query = `INSERT INTO Trojan (
+    let query = `INSERT INTO SS (
         PASSWORD,
         ADDRESS,
         PORT,
-        SECURITY,
-        FLOW,
-        LEVEL,
         METHOD,
-        OTA,
-        HOST,
-        TYPE,
+        PLUGIN,
         PATH,
-        SERVICE_NAME,
-        MODE,
-        ALLOW_INSECURE,
-        SNI,
+        HOST,
+        TLS,
         REMARK,
-        IS_CDN,
         CC,
         REGION
     ) VALUES (
         '${this.account.id}',
         '${this.account.address}',
         ${this.account.port},
-        '${this.account.tls}',
-        '${this.account.flow}',
-        ${this.account.level},
         '${this.account.method}',
-        ${this.account.ota ? 1 : 0},
-        '${this.account.host}',
-        '${this.account.network}',
+        '${this.account.plugin}',
         '${this.account.path}',
-        '${this.account.serviceName}',
-        '${this.account.mode}',
-        ${this.account.skipCertVerify ? 1 : 0},
-        '${this.account.sni}',
+        '${this.account.host}',
+        '${this.account.tls}',
         '${this.account.remark}',
-        ${this.account.cdn ? 1 : 0},
         '${this.account.cc}',
         '${this.account.region}'
-        );`;
+    );`;
 
     return await new Promise((resolve, reject) => {
       conn.run(query, (err: Error) => {
@@ -148,7 +120,7 @@ class Trojan {
 
   async drop() {
     const conn = await db.connect();
-    const query = "DROP TABLE IF EXISTS Trojan";
+    const query = "DROP TABLE IF EXISTS SS";
 
     await new Promise((resolve, reject) => {
       conn.run(query, (err: Error) => {
@@ -165,64 +137,40 @@ class Trojan {
   // Convert to various format
   toV2Object(): any {
     try {
-      let config = urlParser(this.url);
+      let config = ssParser(this.url) as SSInterface;
 
       return {
-        vpn: "trojan",
+        vpn: "ss",
         address: config.hostname,
-        port: parseInt(`${config.port}`) || 443,
-        host: config.query.host || "",
-        id: config.auth,
-        network: config.query.type || "tcp",
-        path: config.query.path || "",
-        serviceName: config.query.serviceName || "",
-        mode: config.query.mode || "",
-        skipCertVerify: true,
-        tls: "tls",
-        sni: config.query.sni || config.query.host || "",
-        flow: config.query.flow || "",
-        level: config.query.level || 8,
-        method: config.query.method || "chacha20-poly1305",
-        ota: config.query.ota ? true : false,
+        port: parseInt(`${config.port}`),
+        plugin: config.query.plugin,
+        method: config.query.method || "aes-256-gcm",
+        id: config.query.password,
+        path: config.query.path,
+        host: config.query["obfs-host"] || config.query.host,
+        tls: config.query.tls !== undefined ? "tls" : config.query.obfs === "tls" ? "tls" : "",
         remark: config.hash?.replace(/^#/, "") || config.hostname,
       } as V2Object;
     } catch (e: any) {
-      return { vpn: "trojan", error: e.message } as V2Object;
+      return { vpn: "ss", error: e.message } as V2Object;
     }
   }
 
   toSingBox(account?: V2Object) {
     if (!account) account = this.account;
 
-    let proxy: any = {
-      type: account.vpn,
+    return {
+      type: "shadowsocks",
       tag: account.remark,
+
       server: account.address,
       server_port: account.port,
+      method: account.method,
       password: account.id,
-      tls: {
-        enabled: account.tls ? true : false,
-        insecure: account.skipCertVerify || true,
-        server_name: account.sni || account.host,
-      },
+      plugin: account.plugin || "",
+      plugin_opts: account.pluginParam || "",
     };
-
-    if (account.network == "ws") {
-      proxy.transport = {
-        type: "ws",
-        path: account.path,
-        headers: {
-          Host: account.host,
-        },
-      };
-    } else if (account.network == "grpc") {
-      proxy.transport = {
-        type: "grpc",
-        service_name: account.serviceName,
-      };
-    }
-    return proxy;
   }
 }
 
-export { Trojan };
+export { SS };

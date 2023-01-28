@@ -74,6 +74,19 @@ export interface TrojanInterface {
 
 export interface VlessInterface extends TrojanInterface {}
 
+export interface SSInterface extends UrlWithParsedQuery {
+  query: {
+    plugin: string;
+    path: string;
+    host: string;
+    obfs: string;
+    "obfs-host": string;
+    tls: string;
+    method: string;
+    password: string;
+  };
+}
+
 export interface SSRInterface extends UrlWithParsedQuery {
   query: {
     group: string;

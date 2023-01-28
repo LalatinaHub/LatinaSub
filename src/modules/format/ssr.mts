@@ -157,7 +157,7 @@ class SSR {
         tls: config.query.obfs?.match("obfs") ? "tls" : "",
       } as V2Object;
     } catch (e: any) {
-      return { vpn: "vmess", error: e.message } as V2Object;
+      return { vpn: "ssr", error: e.message } as V2Object;
     }
   }
 

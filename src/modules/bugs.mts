@@ -36,6 +36,17 @@ class Bugs {
       } else {
         account.obfsParam = `obfs=http;obfs-host=${sni}`;
       }
+    } else if (account.vpn == "ss") {
+      if (account.plugin?.match("obfs")) {
+        account.pluginParam = `obfs=${account.tls ? "tls" : "http"};obfs-host=${sni}`;
+      } else if (account.plugin?.match("v2ray")) {
+        if (mode == "cdn") {
+          account.pluginParam = `path=${account.path};host=${account.address}${account.tls ? ";tls" : ""}`;
+          account.address = cdn;
+        } else {
+          account.pluginParam = `path=${account.path};host=${sni}${account.tls ? ";tls" : ""}`;
+        }
+      }
     } else {
       if (mode == "cdn") {
         account.address = cdn;
