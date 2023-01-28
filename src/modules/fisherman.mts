@@ -12,15 +12,15 @@ class Fisherman {
   private _fisherman!: FishermanType;
 
   constructor(url: string) {
-    if (url.startsWith("vmess://")) {
+    if (url.startsWith("vmess")) {
       this._fisherman = new Vmess(url);
-    } else if (url.startsWith("trojan://")) {
+    } else if (url.startsWith("trojan")) {
       this._fisherman = new Trojan(url);
-    } else if (url.startsWith("ssr://")) {
+    } else if (url.startsWith("ssr")) {
       this._fisherman = new SSR(url);
-    } else if (url.startsWith("ss://")) {
+    } else if (url.startsWith("ss")) {
       this._fisherman = new SS(url);
-    } else if (url.startsWith("vless://")) {
+    } else if (url.startsWith("vless")) {
       this._fisherman = new Vless(url);
     }
   }
