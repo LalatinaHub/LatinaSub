@@ -62,6 +62,22 @@ class Main {
             // Override config
             if (configUrl.startsWith("ssr")) {
               account.config.network = "OBFS";
+            } else if (configUrl.startsWith("ss")) {
+              switch (account.config.port) {
+                case 443:
+                case 8443:
+                  account.config.tls = "tls";
+                  break;
+              }
+
+              switch (account.config.plugin) {
+                case "obfs-local":
+                  account.config.network = "OBFS";
+                  break;
+                case "v2ray-plugin":
+                  account.config.network = "V2RAY";
+                  break;
+              }
             }
 
             account.config.skipCertVerify = true;
@@ -72,6 +88,7 @@ class Main {
                 break;
               case "grpc":
               case "obfs":
+              case "v2ray":
                 break;
               default:
                 account.config.network = "tcp";

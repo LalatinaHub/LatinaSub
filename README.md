@@ -55,3 +55,7 @@ Check [this folder](https://github.com/LalatinaHub/LatinaSub/tree/main/src/modul
 
 - [sing-box](https://github.com/SagerNet/sing-box)
 - [subconverter](https://github.com/tindy2013/subconverter)
+
+## License
+
+This software released under [MIT License](https://github.com/LalatinaHub/License/blob/main/LICENSE)
