@@ -4,7 +4,7 @@ export const pattern: RegExp = new RegExp(`(?!${excludedType.join("|")})(${accep
 export const path: string = process.cwd();
 
 import { subMerge } from "./modules/sub_merge.js";
-import { readFileSync, writeFileSync } from "fs";
+import { copyFileSync, readFileSync, writeFileSync } from "fs";
 import { scraper } from "./modules/scraper.mjs";
 import { Sub } from "./utils/types.mjs";
 import { Fisherman, FishermanType } from "./modules/fisherman.mjs";
@@ -168,6 +168,12 @@ class Main {
     );
     writeFileSync("./result/nodes", this.configUrls.join("\n"));
     writeFileSync("./result/blacklist", this.blacklist.join("\n"));
+
+    // API Mode
+    // The DB will be copied to ../resources (refer LatinaApi) too
+    if (process.env.API_MODE) {
+      copyFileSync("./result/db.sqlite", "../resources/db.sqlite");
+    }
   }
 }
 
