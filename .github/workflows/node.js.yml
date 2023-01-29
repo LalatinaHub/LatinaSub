@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          repository: 'LalatinaHub/LatinaSub'
+          repository: "LalatinaHub/LatinaSub"
       - name: Get secrets
         run: |
           echo ${{ secrets.BOT_TOKEN }} > ./bot_token
@@ -38,7 +38,7 @@ jobs:
           sudo chmod +x ./bin/*
       - name: Start Fishing
         run: |
-          npm install && npx tsc && node ./app/index.js
+          npm install && npm start
       - name: Publish Result
         if: ${{ success() }}
         uses: EndBug/add-and-commit@v9

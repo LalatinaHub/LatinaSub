@@ -4,6 +4,7 @@
   "description": "Free subscription nodes but stored on sqlite",
   "main": "app/index.js",
   "scripts": {
+    "start": "npx tsc && node ./app/init.js && node ./app/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

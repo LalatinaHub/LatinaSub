@@ -4,6 +4,7 @@ import { logger, LogLevel } from "./logger.mjs";
 import { Fisherman } from "./fisherman.mjs";
 import { subconverter } from "./subconverter.mjs";
 import fetch from "node-fetch";
+import { readFileSync, writeFileSync } from "fs";
 
 type ScraperType = {
   error?: boolean;
@@ -11,6 +12,8 @@ type ScraperType = {
 };
 
 class Scraper {
+  private blacklist: string[] = readFileSync("./result/blacklist").toString().split("\n");
+
   private async get(url: string, target: string): Promise<string[]> {
     let configs: string[] = [];
 
@@ -35,6 +38,8 @@ class Scraper {
 
       if (res.status != 200) {
         logger.log(LogLevel.error, `${url} -> ${res.status} ${res.statusText}`);
+
+        if (!this.blacklist.includes(url)) this.blacklist.push(url);
         return [];
       } else {
         clearTimeout(timeout);
@@ -92,6 +97,9 @@ class Scraper {
           await this.get(url, target)
             .then((res) => {
               res.forEach((configUrl) => {
+                // Blacklist filter
+                if (this.blacklist.includes(configUrl)) return;
+
                 const { address, port, id, path, vpn } = new Fisherman(configUrl).toV2Object();
                 const uniqueId = `${address}_${port}_${id}_${path}_${vpn}`;
 
@@ -125,6 +133,7 @@ class Scraper {
       result.push(config);
     }
 
+    writeFileSync("./result/blacklist", this.blacklist.join("\n"));
     return {
       result,
     };

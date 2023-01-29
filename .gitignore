@@ -44,3 +44,4 @@ test*
 sub/
 app/
 bin/
+bot_token

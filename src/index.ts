@@ -20,6 +20,7 @@ import countryCodeEmoji from "country-code-emoji";
 class Main {
   private urls: string[] = [];
   private configUrls: string[] = [];
+  private blacklist: string[] = readFileSync("./result/blacklist").toString().split("\n");
   private connectCount: number = 0;
   private maxConcurrentTest: number = 50;
   private maxResult: number = 999999999;
@@ -105,6 +106,7 @@ class Main {
               .connect(account.toSingBox(true, mode as "cdn" | "sni"))
               .then(async (res) => {
                 if (res.error) {
+                  if (!this.blacklist.includes(configUrl)) this.blacklist.push(configUrl);
                   // logger.log(LogLevel.error, `[${account.config.vpn}] ${account.config.remark} -> ${res.message}`);
                   return;
                 }
@@ -164,6 +166,7 @@ class Main {
       this.connectCount
     );
     writeFileSync("./result/nodes", this.configUrls.join("\n"));
+    writeFileSync("./result/blacklist", this.blacklist.join("\n"));
   }
 }
 
