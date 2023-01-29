@@ -5,7 +5,7 @@
   "main": "app/index.js",
   "scripts": {
     "bg": "npm start > log.txt &",
-    "start": "npx tsc && node ./app/init.js && node ./app/index.js",
+    "start": "npm install --build-from-source && npx tsc && node ./app/init.js && node ./app/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
