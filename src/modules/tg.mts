@@ -5,7 +5,7 @@ import countryCodeEmoji from "country-code-emoji";
 
 class Bot {
   bot = new TgBot(readFileSync("./bot_token").toString());
-  private channelId = "-1001509827144";
+  private channelId = "-1001509827144"; // Must be able to change via env
 
   private async make(fisherman: FishermanType, total: number) {
     const account = fisherman.account;
