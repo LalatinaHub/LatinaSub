@@ -4,6 +4,7 @@ import { existsSync, mkdirSync, stat, writeFileSync } from "fs";
 if (!existsSync("./result")) mkdirSync("./result");
 if (!existsSync("./result/blacklist")) writeFileSync("./result/blacklist", "");
 if (process.env.BOT_TOKEN) writeFileSync("./bot_token", process.env.BOT_TOKEN);
+if (process.env.CHANNEL_ID) writeFileSync("./channel_id", process.env.CHANNEL_ID);
 
 stat("./result/blacklist", (e, s) => {
   if (e) {
