@@ -1,4 +1,4 @@
 {
-  "cdn": ["main.millionaireaisle.com"],
-  "sni": ["config.teams.microsoft.com"]
+  "cdn": ["104.16.182.15"],
+  "sni": ["google.com"]
 }

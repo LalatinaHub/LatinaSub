@@ -54,31 +54,38 @@ class Main {
       logger.log(LogLevel.info, `Max concurrent test: ${this.maxConcurrentTest}`);
       for (const configUrl of configUrls) {
         const modes = ["cdn", "sni"];
-        if (configUrl.startsWith("ssr")) modes.shift();
+        switch (configUrl.replace(/:.+/, "")) {
+          case "ssr":
+          case "ss":
+            modes.shift();
+        }
 
         for (const mode of modes) {
           new Promise(async (resolve) => {
             const account = new Fisherman(configUrl);
 
             // Override config
-            if (configUrl.startsWith("ssr")) {
-              account.config.network = "OBFS";
-            } else if (configUrl.startsWith("ss")) {
-              switch (account.config.port) {
-                case 443:
-                case 8443:
-                  account.config.tls = "tls";
-                  break;
-              }
+            switch (configUrl.replace(/:.+/, "")) {
+              case "ssr":
+                account.config.network = "OBFS";
+                break;
+              case "ss":
+                switch (account.config.port) {
+                  case 443:
+                  case 8443:
+                    account.config.tls = "tls";
+                    break;
+                }
 
-              switch (account.config.plugin) {
-                case "obfs-local":
-                  account.config.network = "OBFS";
-                  break;
-                case "v2ray-plugin":
-                  account.config.network = "V2RAY";
-                  break;
-              }
+                switch (account.config.plugin) {
+                  case "obfs-local":
+                    account.config.network = "OBFS";
+                    break;
+                  case "v2ray-plugin":
+                    account.config.network = "V2RAY";
+                    break;
+                }
+                break;
             }
 
             account.config.skipCertVerify = true;
