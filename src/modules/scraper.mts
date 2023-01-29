@@ -91,6 +91,7 @@ class Scraper {
 
     let onScrape: number[] = [];
     for (const url of urls) {
+      if (this.blacklist.includes(url)) continue;
       new Promise(async (resolve) => {
         for (const target of acceptedType) {
           onScrape.push(1);
