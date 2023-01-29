@@ -12,7 +12,7 @@ type ScraperType = {
 };
 
 class Scraper {
-  private blacklist: string[] = readFileSync("./result/blacklist").toString().split("\n");
+  private blacklist: string[] = [];
 
   private async get(url: string, target: string): Promise<string[]> {
     let configs: string[] = [];
@@ -88,6 +88,8 @@ class Scraper {
     const isExists: string[] = [];
     const result: string[] = [];
     const configs: string[] = [];
+
+    this.blacklist = readFileSync("./result/blacklist").toString().split("\n");
 
     let onScrape: number[] = [];
     for (const url of urls) {

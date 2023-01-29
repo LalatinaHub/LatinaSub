@@ -20,7 +20,7 @@ import countryCodeEmoji from "country-code-emoji";
 class Main {
   private urls: string[] = [];
   private configUrls: string[] = [];
-  private blacklist: string[] = readFileSync("./result/blacklist").toString().split("\n");
+  private blacklist: string[] = [];
   private connectCount: number = 0;
   private maxConcurrentTest: number = 50;
   private maxResult: number = 999999999;
@@ -28,6 +28,7 @@ class Main {
   private fishermanObjects: FishermanType[] = [];
 
   constructor() {
+    this.blacklist = readFileSync("./result/blacklist").toString().split("\n");
     const subList: Sub[] = JSON.parse(readFileSync("./sub_list.json").toString());
     for (const sub of subList) {
       this.urls.push(...sub.url.split("|"));
