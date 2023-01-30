@@ -12,7 +12,7 @@ type ScraperType = {
 };
 
 class Scraper {
-  private blacklist: string[] = [];
+  private blacklistSub: string[] = readFileSync("./result/blacklist_sub").toString().split("\n");
 
   private async get(url: string, target: string): Promise<string[]> {
     let configs: string[] = [];
@@ -39,7 +39,7 @@ class Scraper {
       if (res.status != 200) {
         logger.log(LogLevel.error, `${url} -> ${res.status} ${res.statusText}`);
 
-        if (!this.blacklist.includes(url)) this.blacklist.push(url);
+        if (!this.blacklistSub.includes(url)) this.blacklistSub.push(url);
         return [];
       } else {
         clearTimeout(timeout);
@@ -89,20 +89,17 @@ class Scraper {
     const result: string[] = [];
     const configs: string[] = [];
 
-    this.blacklist = readFileSync("./result/blacklist").toString().split("\n");
-
     let onScrape: number[] = [];
     for (const url of urls) {
-      if (this.blacklist.includes(url)) continue;
+      // Blacklist filter
+      if (this.blacklistSub.includes(url)) continue;
+
       new Promise(async (resolve) => {
         for (const target of acceptedType) {
           onScrape.push(1);
           await this.get(url, target)
             .then((res) => {
               res.forEach((configUrl) => {
-                // Blacklist filter
-                if (this.blacklist.includes(configUrl)) return;
-
                 const { address, port, id, path, vpn } = new Fisherman(configUrl).toV2Object();
                 const uniqueId = `${address}_${port}_${id}_${path}_${vpn}`;
 
@@ -136,7 +133,7 @@ class Scraper {
       result.push(config);
     }
 
-    writeFileSync("./result/blacklist", this.blacklist.join("\n"));
+    writeFileSync("./result/blacklist_sub", this.blacklistSub.join("\n"));
     return {
       result,
     };

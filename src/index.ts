@@ -20,7 +20,7 @@ import countryCodeEmoji from "country-code-emoji";
 class Main {
   private urls: string[] = [];
   private configUrls: string[] = [];
-  private blacklist: string[] = [];
+  private blacklistNode: string[] = readFileSync("./result/blacklist_node").toString().split("\n");
   private connectCount: number = 0;
   private maxConcurrentTest: number = 50;
   private maxResult: number = 999999999;
@@ -28,7 +28,6 @@ class Main {
   private fishermanObjects: FishermanType[] = [];
 
   constructor() {
-    this.blacklist = readFileSync("./result/blacklist").toString().split("\n");
     const subList: Sub[] = JSON.parse(readFileSync("./sub_list.json").toString());
     for (const sub of subList) {
       this.urls.push(...sub.url.split("|"));
@@ -55,6 +54,9 @@ class Main {
       logger.log(LogLevel.info, `Start test number: ${i}`);
       logger.log(LogLevel.info, `Max concurrent test: ${this.maxConcurrentTest}`);
       for (const configUrl of configUrls) {
+        // Blacklist filter
+        if (this.blacklistNode.includes(configUrl)) continue;
+
         const modes = ["cdn", "sni"];
         switch (configUrl.replace(/:.+/, "")) {
           case "ssr":
@@ -107,7 +109,7 @@ class Main {
               .connect(account.toSingBox(true, mode as "cdn" | "sni"))
               .then(async (res) => {
                 if (res.error) {
-                  if (!this.blacklist.includes(configUrl)) this.blacklist.push(configUrl);
+                  if (!this.blacklistNode.includes(configUrl)) this.blacklistNode.push(configUrl);
                   // logger.log(LogLevel.error, `[${account.config.vpn}] ${account.config.remark} -> ${res.message}`);
                   return;
                 }
@@ -167,7 +169,7 @@ class Main {
       this.connectCount
     );
     writeFileSync("./result/nodes", this.configUrls.join("\n"));
-    writeFileSync("./result/blacklist", this.blacklist.join("\n"));
+    writeFileSync("./result/blacklist_node", this.blacklistNode.join("\n"));
 
     // API Mode
     // The DB will be copied to ../resources (refer LatinaApi) too
