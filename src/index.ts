@@ -180,6 +180,9 @@ class Main {
 }
 
 (async () => {
+  // Print log date
+  logger.log(LogLevel.info, `Run Date => ${new Date()}`);
+
   // Initialize
   await db.make();
   for (const vpn of acceptedType) {
