@@ -54,9 +54,6 @@ class Main {
       logger.log(LogLevel.info, `Start test number: ${i}`);
       logger.log(LogLevel.info, `Max concurrent test: ${this.maxConcurrentTest}`);
       for (const configUrl of configUrls) {
-        // Blacklist filter
-        if (this.blacklistNode.includes(configUrl)) continue;
-
         const modes = ["cdn", "sni"];
         switch (configUrl.replace(/:.+/, "")) {
           case "ssr":
@@ -64,6 +61,9 @@ class Main {
         }
 
         for (const mode of modes) {
+          // Blacklist filter
+          if (this.blacklistNode.includes(`${configUrl}-${mode}`)) continue;
+
           new Promise(async (resolve) => {
             const account = new Fisherman(configUrl);
 
@@ -109,8 +109,8 @@ class Main {
               .connect(account.toSingBox(true, mode as "cdn" | "sni"))
               .then(async (res) => {
                 if (res.error) {
-                  if (i == this.numberOfTest) {
-                    if (!this.blacklistNode.includes(configUrl)) this.blacklistNode.push(configUrl);
+                  if (!this.blacklistNode.includes(`${configUrl}-${mode}`)) {
+                    this.blacklistNode.push(`${configUrl}-${mode}`);
                   }
                   // logger.log(LogLevel.error, `[${account.config.vpn}] ${account.config.remark} -> ${res.message}`);
                   return;
