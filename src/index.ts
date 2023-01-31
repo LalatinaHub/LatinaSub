@@ -69,7 +69,7 @@ class Main {
             const { address, host, port, id, path, serviceName, network, vpn } = account.toV2Object();
             const uniqueId = `${address}_${port}_${id}_${host}_${path}_${network}_${serviceName}_${mode}_${vpn}`;
             if (this.blacklistNode.includes(uniqueId)) {
-              logger.log(LogLevel.info, "Blacklisted node found !");
+              // logger.log(LogLevel.info, "Blacklisted node found !");
               resolve(0);
             }
 
