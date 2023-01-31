@@ -54,7 +54,7 @@ class Vless {
   }
 
   async isExists() {
-    const { network, port, id, path, cdn, serviceName, mode } = this.account;
+    const { address, host, network, port, id, path, cdn, serviceName, mode } = this.account;
     const conn = await db.connect();
 
     let query = `SELECT * FROM Vless WHERE PORT=${port} AND PASSWORD='${id}' AND IS_CDN=${
@@ -63,6 +63,8 @@ class Vless {
     if (path) query += ` AND PATH='${path}'`;
     if (serviceName) query += ` AND SERVICE_NAME='${serviceName}'`;
     if (mode) query += ` AND MODE='${mode}'`;
+    if (cdn) query += ` AND HOST='${host}'`;
+    else query += ` AND ADDRESS='${address}'`;
 
     return await new Promise((resolve, reject) => {
       conn.get(query, (err: Error, row: any) => {

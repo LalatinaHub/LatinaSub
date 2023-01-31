@@ -100,8 +100,10 @@ class Scraper {
           await this.get(url, target)
             .then((res) => {
               res.forEach((configUrl) => {
-                const { address, port, id, path, vpn } = new Fisherman(configUrl).toV2Object();
-                const uniqueId = `${address}_${port}_${id}_${path}_${vpn}`;
+                const { address, host, port, id, path, serviceName, network, vpn } = new Fisherman(
+                  configUrl
+                ).toV2Object();
+                const uniqueId = `${address}_${port}_${id}_${host}_${path}_${network}_${serviceName}_${vpn}`;
 
                 if (!isExists.includes(uniqueId)) {
                   result.push(configUrl);

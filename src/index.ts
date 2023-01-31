@@ -48,7 +48,7 @@ class Main {
       this.configUrls = [];
       this.connectCount = 0;
       this.maxConcurrentTest = Math.round(configUrls.length / 100 / 2);
-      if (this.maxConcurrentTest > 150) this.maxConcurrentTest = 150;
+      if (this.maxConcurrentTest > 100) this.maxConcurrentTest = 100;
       if (this.maxConcurrentTest < 50) this.maxConcurrentTest = 50;
 
       logger.log(LogLevel.info, `Start test number: ${i}`);
@@ -57,15 +57,21 @@ class Main {
         const modes = ["cdn", "sni"];
         switch (configUrl.replace(/:.+/, "")) {
           case "ssr":
+          case "ss":
             modes.shift();
         }
 
         for (const mode of modes) {
-          // Blacklist filter
-          if (this.blacklistNode.includes(`${configUrl}-${mode}`)) continue;
-
           new Promise(async (resolve) => {
             const account = new Fisherman(configUrl);
+
+            // Blacklist filter
+            const { address, host, port, id, path, serviceName, network, vpn } = account.toV2Object();
+            const uniqueId = `${address}_${port}_${id}_${host}_${path}_${network}_${serviceName}_${mode}_${vpn}`;
+            if (this.blacklistNode.includes(uniqueId)) {
+              logger.log(LogLevel.info, "Blacklisted node found !");
+              resolve(0);
+            }
 
             // Override config
             switch (configUrl.replace(/:.+/, "")) {
@@ -109,9 +115,8 @@ class Main {
               .connect(account.toSingBox(true, mode as "cdn" | "sni"))
               .then(async (res) => {
                 if (res.error) {
-                  if (!this.blacklistNode.includes(`${configUrl}-${mode}`)) {
-                    this.blacklistNode.push(`${configUrl}-${mode}`);
-                  }
+                  if (!this.blacklistNode.includes(uniqueId)) this.blacklistNode.push(uniqueId);
+
                   // logger.log(LogLevel.error, `[${account.config.vpn}] ${account.config.remark} -> ${res.message}`);
                   return;
                 }
@@ -161,8 +166,11 @@ class Main {
     }
 
     logger.log(LogLevel.info, "Saving accounts to database...");
+    this.connectCount = 0;
     for (const account of this.fishermanPool) {
-      await account.insert();
+      await account.insert().then((code) => {
+        if (code != 2) this.connectCount++;
+      });
     }
 
     logger.log(LogLevel.info, "Sending sample to telegram channel ...");

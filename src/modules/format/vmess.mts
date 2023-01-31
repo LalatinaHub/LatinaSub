@@ -53,13 +53,15 @@ class Vmess {
   }
 
   async isExists() {
-    const { network, port, id, path, cdn } = this.account;
+    const { address, host, network, port, id, path, cdn } = this.account;
     const conn = await db.connect();
 
     let query = `SELECT * FROM Vmess WHERE PORT=${port} AND PASSWORD='${id}' AND IS_CDN=${
       cdn ? 1 : 0
     } AND NETWORK='${network}'`;
     if (path) query += ` AND PATH='${path}'`;
+    if (cdn) query += ` AND HOST='${host}'`;
+    else query += ` AND ADDRESS='${address}'`;
 
     return await new Promise((resolve, reject) => {
       conn.get(query, (err: Error, row: any) => {
