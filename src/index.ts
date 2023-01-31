@@ -109,7 +109,9 @@ class Main {
               .connect(account.toSingBox(true, mode as "cdn" | "sni"))
               .then(async (res) => {
                 if (res.error) {
-                  if (!this.blacklistNode.includes(configUrl)) this.blacklistNode.push(configUrl);
+                  if (i == this.numberOfTest) {
+                    if (!this.blacklistNode.includes(configUrl)) this.blacklistNode.push(configUrl);
+                  }
                   // logger.log(LogLevel.error, `[${account.config.vpn}] ${account.config.remark} -> ${res.message}`);
                   return;
                 }
