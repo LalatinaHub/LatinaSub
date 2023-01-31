@@ -144,7 +144,7 @@ class SS {
         vpn: "ss",
         address: config.hostname,
         port: parseInt(`${config.port}`),
-        plugin: config.query.plugin || "obfs-local",
+        plugin: config.query.plugin,
         method: config.query.method || "aes-256-gcm",
         id: config.query.password,
         path: config.query.path || "",
