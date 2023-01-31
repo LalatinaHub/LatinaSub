@@ -161,6 +161,8 @@ class Main {
 
       console.log("");
       logger.log(LogLevel.info, `Total Connected Account -> ${this.connectCount}`);
+      logger.log(LogLevel.info, "Sleeping for 1 minute...");
+      await sleep(60000);
     }
 
     logger.log(LogLevel.info, "Sending sample to telegram channel ...");
