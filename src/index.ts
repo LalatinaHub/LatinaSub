@@ -70,7 +70,7 @@ class Main {
             const uniqueId = `${address}_${port}_${id}_${host}_${path}_${network}_${serviceName}_${mode}_${vpn}`;
             if (this.blacklistNode.includes(uniqueId)) {
               // logger.log(LogLevel.info, "Blacklisted node found !");
-              resolve(0);
+              return resolve(0);
             }
 
             // Override config
