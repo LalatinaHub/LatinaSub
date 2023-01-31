@@ -25,7 +25,7 @@ class Main {
   private maxConcurrentTest: number = 50;
   private maxResult: number = 999999999;
   private numberOfTest: number = 2;
-  private fishermanObjects: FishermanType[] = [];
+  private fishermanPool: FishermanType[] = [];
 
   constructor() {
     const subList: Sub[] = JSON.parse(readFileSync("./sub_list.json").toString());
@@ -125,19 +125,12 @@ class Main {
                   account.config.tls ? "TLS" : "NTLS"
                 }`;
 
+                this.configUrls.push(configUrl);
+                logger.log(LogLevel.success, `[${account.config.vpn}] ${account.config.remark}: OK`);
+                this.connectCount++;
+
                 if (i == this.numberOfTest) {
-                  await account.save().then((code) => {
-                    this.configUrls.push(configUrl);
-                    if (code != 2) {
-                      this.configUrls.push(configUrl);
-                      this.fishermanObjects.push(account.fisherman);
-                      this.connectCount++;
-                    }
-                  });
-                } else {
-                  this.configUrls.push(configUrl);
-                  logger.log(LogLevel.success, `[${account.config.vpn}] ${account.config.remark}: OK`);
-                  this.connectCount++;
+                  this.fishermanPool.push(account.fisherman);
                 }
               })
               .finally(() => {
@@ -165,9 +158,14 @@ class Main {
       await sleep(60000);
     }
 
+    logger.log(LogLevel.info, "Saving accounts to database...");
+    for (const account of this.fishermanPool) {
+      await account.insert();
+    }
+
     logger.log(LogLevel.info, "Sending sample to telegram channel ...");
     await bot.sendToChannel(
-      this.fishermanObjects[Math.floor(Math.random() * this.fishermanObjects.length)],
+      this.fishermanPool[Math.floor(Math.random() * this.fishermanPool.length)],
       this.connectCount
     );
     writeFileSync("./result/nodes", this.configUrls.join("\n"));
