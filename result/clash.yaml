@@ -1,0 +1,608 @@
+allow-lan: false
+external-controller: 127.0.0.1:9090
+log-level: info
+mode: rule
+port: 7890
+proxies:
+    - name: "[1] \U0001F1E9\U0001F1EA AEZA GROUP LLC WS CDN TLS"
+      network: ws
+      port: 443
+      server: 172.67.217.240
+      servername: web-socket.tgdaosheng.ggff.net
+      skip-cert-verify: true
+      tls: true
+      type: vless
+      udp: true
+      uuid: 9b18ccef-b9e0-41d1-8990-9d970569e142
+      ws-opts:
+        headers:
+            Host: web-socket.tgdaosheng.ggff.net
+        path: /proxyip=bpb.yousef.isegaro.com
+    - name: "[2] \U0001F1E9\U0001F1EA AEZA GROUP LLC WS DIRECT TLS"
+      network: ws
+      port: 443
+      server: 172.67.217.240
+      servername: web-socket.tgdaosheng.ggff.net
+      skip-cert-verify: true
+      tls: true
+      type: vless
+      udp: true
+      uuid: 9b18ccef-b9e0-41d1-8990-9d970569e142
+      ws-opts:
+        headers:
+            Host: web-socket.tgdaosheng.ggff.net
+        path: /proxyip=bpb.yousef.isegaro.com
+    - name: "[3] \U0001F1F3\U0001F1F1 Bunny Communications WS SNI"
+      network: ws
+      port: 2087
+      server: 178.95.170.83
+      skip-cert-verify: true
+      tls: false
+      type: vless
+      udp: true
+      uuid: bf443e4a-aa9e-4509-abf0-d0f6828d57be
+      ws-opts:
+        path: /4bc027a44532
+    - name: "[4] \U0001F1F3\U0001F1F1 Bunny Communications WS DIRECT"
+      network: ws
+      port: 2087
+      server: 178.95.170.83
+      skip-cert-verify: true
+      tls: false
+      type: vless
+      udp: true
+      uuid: bf443e4a-aa9e-4509-abf0-d0f6828d57be
+      ws-opts:
+        path: /4bc027a44532
+    - name: "[5] \U0001F1E9\U0001F1EA Private Customer WS DIRECT TLS"
+      network: ws
+      password: MiTiVPN
+      port: 443
+      server: 151.101.56.7
+      skip-cert-verify: true
+      sni: ssl.fastly.com
+      type: trojan
+      udp: true
+      ws-opts:
+        headers:
+            Host: mitivpn-mitivpn-mitivpn--mitivpn-mitivpn--mitivpn.global.ssl.fastly.net
+        path: /---TOOTFFARANGI
+    - name: "[6] \U0001F1E9\U0001F1EA RCS Technologies FZE LLC WS DIRECT TLS"
+      network: ws
+      password: MiTiVPN
+      port: 443
+      server: 199.232.78.160
+      skip-cert-verify: true
+      sni: ssl.fastly.com
+      type: trojan
+      udp: true
+      ws-opts:
+        headers:
+            Host: mitivpn-ss-mitivpn-----mitivpn.global.ssl.fastly.net
+        path: /
+    - name: "[7] \U0001F1FA\U0001F1F8 MASSIVEGRID LTD WS CDN TLS"
+      network: ws
+      port: 443
+      server: 104.21.56.104
+      servername: 5-M19.aLbANIa.KdNs.Fr
+      skip-cert-verify: true
+      tls: true
+      type: vless
+      udp: true
+      uuid: a90c264d-3853-4eef-9a3d-628b2d02d15e
+      ws-opts:
+        headers:
+            Host: 5-M19.AlBaNia.KDNs.Fr
+        path: /CjBjB9sn5pCvaSwScc
+    - name: "[8] \U0001F1FA\U0001F1F8 MASSIVEGRID LTD WS DIRECT TLS"
+      network: ws
+      port: 443
+      server: 104.21.56.104
+      servername: 5-M19.aLbANIa.KdNs.Fr
+      skip-cert-verify: true
+      tls: true
+      type: vless
+      udp: true
+      uuid: a90c264d-3853-4eef-9a3d-628b2d02d15e
+      ws-opts:
+        headers:
+            Host: 5-M19.AlBaNia.KDNs.Fr
+        path: /CjBjB9sn5pCvaSwScc
+    - name: "[9] \U0001F1FA\U0001F1F8 Private Customer WS CDN TLS"
+      network: ws
+      port: 443
+      server: 104.21.91.142
+      servername: cf.udpid.org
+      skip-cert-verify: true
+      tls: true
+      type: vless
+      udp: true
+      uuid: 7893b302-3882-4c38-9ab6-6313f1575d1a
+      ws-opts:
+        headers:
+            Host: cf.udpid.org
+        path: /@zyzzzoao
+    - name: "[10] \U0001F1FA\U0001F1F8 Private Customer WS DIRECT TLS"
+      network: ws
+      port: 443
+      server: 104.21.91.142
+      servername: cf.udpid.org
+      skip-cert-verify: true
+      tls: true
+      type: vless
+      udp: true
+      uuid: 7893b302-3882-4c38-9ab6-6313f1575d1a
+      ws-opts:
+        headers:
+            Host: cf.udpid.org
+        path: /@zyzzzoao
+    - name: "[11] \U0001F1FA\U0001F1F8 UCLOUD TROJAN SNI TLS"
+      network: tcp
+      password: 02cd3bac-2a78-4dbb-82b9-6b64084ddd8e
+      port: 38261
+      server: 107.150.105.84
+      skip-cert-verify: true
+      type: trojan
+      udp: true
+    - name: "[12] \U0001F1FA\U0001F1F8 UCLOUD TROJAN DIRECT TLS"
+      network: tcp
+      password: 02cd3bac-2a78-4dbb-82b9-6b64084ddd8e
+      port: 38261
+      server: 107.150.105.84
+      skip-cert-verify: true
+      type: trojan
+      udp: true
+    - name: "[13] \U0001F1FA\U0001F1F8 UCLOUD TROJAN SNI TLS"
+      network: tcp
+      password: 02cd3bac-2a78-4dbb-82b9-6b64084ddd8e
+      port: 46292
+      server: 107.150.105.84
+      skip-cert-verify: true
+      type: trojan
+      udp: true
+    - name: "[14] \U0001F1FA\U0001F1F8 UCLOUD TROJAN DIRECT TLS"
+      network: tcp
+      password: 02cd3bac-2a78-4dbb-82b9-6b64084ddd8e
+      port: 46292
+      server: 107.150.105.84
+      skip-cert-verify: true
+      type: trojan
+      udp: true
+    - name: "[15] \U0001F1FA\U0001F1F8 UCLOUD TROJAN SNI TLS"
+      network: tcp
+      password: 02cd3bac-2a78-4dbb-82b9-6b64084ddd8e
+      port: 54657
+      server: 107.150.105.84
+      skip-cert-verify: true
+      type: trojan
+      udp: true
+    - name: "[16] \U0001F1FA\U0001F1F8 UCLOUD TROJAN DIRECT TLS"
+      network: tcp
+      password: 02cd3bac-2a78-4dbb-82b9-6b64084ddd8e
+      port: 54657
+      server: 107.150.105.84
+      skip-cert-verify: true
+      type: trojan
+      udp: true
+    - name: "[17] \U0001F1FA\U0001F1F8 UCLOUD TROJAN SNI TLS"
+      network: tcp
+      password: 02cd3bac-2a78-4dbb-82b9-6b64084ddd8e
+      port: 20065
+      server: 107.150.105.84
+      skip-cert-verify: true
+      type: trojan
+      udp: true
+    - name: "[18] \U0001F1FA\U0001F1F8 UCLOUD TROJAN DIRECT TLS"
+      network: tcp
+      password: 02cd3bac-2a78-4dbb-82b9-6b64084ddd8e
+      port: 20065
+      server: 107.150.105.84
+      skip-cert-verify: true
+      type: trojan
+      udp: true
+    - name: "[19] \U0001F1EB\U0001F1F7 Scaleway WS DIRECT TLS"
+      network: ws
+      password: humanity
+      port: 2053
+      server: 89.150.34.41
+      skip-cert-verify: true
+      sni: www.calmlunch.com
+      type: trojan
+      udp: true
+      ws-opts:
+        headers:
+            Host: www.calmlunch.com
+        path: /assignment
+    - cipher: aes-256-gcm
+      name: "[20] \U0001F1FA\U0001F1F8 OVH US LLC SHADOWSOCKS SNI"
+      password: pKEW8JPByTVTLtM
+      port: 4444
+      server: 15.204.247.244
+      type: ss
+      udp: true
+    - cipher: aes-256-gcm
+      name: "[21] \U0001F1FA\U0001F1F8 OVH US LLC SHADOWSOCKS DIRECT"
+      password: pKEW8JPByTVTLtM
+      port: 4444
+      server: 15.204.247.244
+      type: ss
+      udp: true
+    - cipher: aes-256-gcm
+      name: "[22] \U0001F1EE\U0001F1F9 OVH Srl SHADOWSOCKS SNI"
+      password: itzvpn@321
+      port: 8388
+      server: 57.131.48.45
+      type: ss
+      udp: true
+    - cipher: aes-256-gcm
+      name: "[23] \U0001F1EE\U0001F1F9 OVH Srl SHADOWSOCKS DIRECT"
+      password: itzvpn@321
+      port: 8388
+      server: 57.131.48.45
+      type: ss
+      udp: true
+    - cipher: aes-256-gcm
+      name: "[24] \U0001F1FA\U0001F1F8 OVH US LLC SHADOWSOCKS SNI"
+      password: kDWvXYZoTBcGkC4
+      port: 8881
+      server: 15.204.246.108
+      type: ss
+      udp: true
+    - cipher: aes-256-gcm
+      name: "[25] \U0001F1FA\U0001F1F8 OVH US LLC SHADOWSOCKS DIRECT"
+      password: kDWvXYZoTBcGkC4
+      port: 8881
+      server: 15.204.246.108
+      type: ss
+      udp: true
+    - alterId: 0
+      cipher: auto
+      name: "[26] \U0001F1FA\U0001F1F8 RackNerd LLC TCP DIRECT"
+      network: tcp
+      port: 15311
+      server: 107.173.254.27
+      skip-cert-verify: true
+      tls: false
+      type: vmess
+      udp: true
+      uuid: ad78d02b-873f-4cff-8d4a-673f53d6ce0f
+    - cipher: aes-256-gcm
+      name: "[27] \U0001F1F5\U0001F1F1 OVH Sp. z o. o. SHADOWSOCKS SNI"
+      password: itzvpn@321
+      port: 8388
+      server: 51.83.192.80
+      type: ss
+      udp: true
+    - cipher: aes-256-gcm
+      name: "[28] \U0001F1F5\U0001F1F1 OVH Sp. z o. o. SHADOWSOCKS DIRECT"
+      password: itzvpn@321
+      port: 8388
+      server: 51.83.192.80
+      type: ss
+      udp: true
+    - cipher: aes-256-gcm
+      name: "[29] \U0001F1E9\U0001F1EA oneprovider.com - Frankfurt Infrastructure SHADOWSOCKS SNI"
+      password: XKFKl2rULjIp74
+      port: 8008
+      server: 185.226.172.8
+      type: ss
+      udp: true
+    - cipher: aes-256-gcm
+      name: "[30] \U0001F1E9\U0001F1EA oneprovider.com - Frankfurt Infrastructure SHADOWSOCKS DIRECT"
+      password: XKFKl2rULjIp74
+      port: 8008
+      server: 185.226.172.8
+      type: ss
+      udp: true
+    - cipher: aes-128-gcm
+      name: "[31] \U0001F1F3\U0001F1F1 VPN Consumer Amsterdam The Netherlands SHADOWSOCKS SNI"
+      password: shadowsocks
+      port: 443
+      server: 158.173.20.208
+      type: ss
+      udp: true
+    - cipher: aes-128-gcm
+      name: "[32] \U0001F1F3\U0001F1F1 VPN Consumer Amsterdam The Netherlands SHADOWSOCKS DIRECT"
+      password: shadowsocks
+      port: 443
+      server: 158.173.20.208
+      type: ss
+      udp: true
+    - cipher: aes-256-gcm
+      name: "[33] \U0001F1FA\U0001F1F8 Vapeline Technology SHADOWSOCKS DIRECT"
+      password: gj1+XKulKV0nmw6IThckOkkJh5DSM7+C
+      port: 443
+      server: 45.207.207.25
+      type: ss
+      udp: true
+    - cipher: aes-256-gcm
+      name: "[34] \U0001F1E8\U0001F1E6 OVH Hosting Inc. SHADOWSOCKS SNI"
+      password: Y6R9pAtvxxzmGC
+      port: 5000
+      server: 51.222.200.165
+      type: ss
+      udp: true
+    - cipher: aes-256-gcm
+      name: "[35] \U0001F1E8\U0001F1E6 OVH Hosting Inc. SHADOWSOCKS DIRECT"
+      password: Y6R9pAtvxxzmGC
+      port: 5000
+      server: 51.222.200.165
+      type: ss
+      udp: true
+    - cipher: chacha20-ietf-poly1305
+      name: "[36] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS SNI"
+      password: oZIoA69Q8yhcQV8ka3Pa3A
+      port: 8080
+      server: 82.38.31.9
+      type: ss
+      udp: true
+    - cipher: chacha20-ietf-poly1305
+      name: "[37] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS DIRECT"
+      password: oZIoA69Q8yhcQV8ka3Pa3A
+      port: 8080
+      server: 82.38.31.9
+      type: ss
+      udp: true
+    - cipher: chacha20-ietf-poly1305
+      name: "[38] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS SNI"
+      password: oZIoA69Q8yhcQV8ka3Pa3A
+      port: 8080
+      server: 82.38.31.7
+      type: ss
+      udp: true
+    - cipher: chacha20-ietf-poly1305
+      name: "[39] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS DIRECT"
+      password: oZIoA69Q8yhcQV8ka3Pa3A
+      port: 8080
+      server: 82.38.31.7
+      type: ss
+      udp: true
+    - cipher: chacha20-ietf-poly1305
+      name: "[40] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS SNI"
+      password: oZIoA69Q8yhcQV8ka3Pa3A
+      port: 8080
+      server: 82.38.31.47
+      type: ss
+      udp: true
+    - cipher: chacha20-ietf-poly1305
+      name: "[41] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS DIRECT"
+      password: oZIoA69Q8yhcQV8ka3Pa3A
+      port: 8080
+      server: 82.38.31.47
+      type: ss
+      udp: true
+    - cipher: chacha20-ietf-poly1305
+      name: "[42] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS SNI"
+      password: oZIoA69Q8yhcQV8ka3Pa3A
+      port: 8080
+      server: 82.38.31.42
+      type: ss
+      udp: true
+    - cipher: chacha20-ietf-poly1305
+      name: "[43] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS DIRECT"
+      password: oZIoA69Q8yhcQV8ka3Pa3A
+      port: 8080
+      server: 82.38.31.42
+      type: ss
+      udp: true
+    - cipher: chacha20-ietf-poly1305
+      name: "[44] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS SNI"
+      password: oZIoA69Q8yhcQV8ka3Pa3A
+      port: 8080
+      server: 82.38.31.35
+      type: ss
+      udp: true
+    - cipher: chacha20-ietf-poly1305
+      name: "[45] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS DIRECT"
+      password: oZIoA69Q8yhcQV8ka3Pa3A
+      port: 8080
+      server: 82.38.31.35
+      type: ss
+      udp: true
+    - cipher: chacha20-ietf-poly1305
+      name: "[46] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS SNI"
+      password: oZIoA69Q8yhcQV8ka3Pa3A
+      port: 8080
+      server: 82.38.31.17
+      type: ss
+      udp: true
+    - cipher: chacha20-ietf-poly1305
+      name: "[47] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS DIRECT"
+      password: oZIoA69Q8yhcQV8ka3Pa3A
+      port: 8080
+      server: 82.38.31.17
+      type: ss
+      udp: true
+    - cipher: chacha20-ietf-poly1305
+      name: "[48] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS SNI"
+      password: oZIoA69Q8yhcQV8ka3Pa3A
+      port: 443
+      server: 82.38.31.162
+      type: ss
+      udp: true
+    - cipher: chacha20-ietf-poly1305
+      name: "[49] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS DIRECT"
+      password: oZIoA69Q8yhcQV8ka3Pa3A
+      port: 443
+      server: 82.38.31.162
+      type: ss
+      udp: true
+    - cipher: chacha20-ietf-poly1305
+      name: "[50] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS SNI"
+      password: oZIoA69Q8yhcQV8ka3Pa3A
+      port: 8080
+      server: 82.38.31.155
+      type: ss
+      udp: true
+proxy-groups:
+    - name: PROXIES
+      proxies:
+        - AUTO-FALLBACK
+        - LOAD-BALANCE
+        - "[1] \U0001F1E9\U0001F1EA AEZA GROUP LLC WS CDN TLS"
+        - "[2] \U0001F1E9\U0001F1EA AEZA GROUP LLC WS DIRECT TLS"
+        - "[3] \U0001F1F3\U0001F1F1 Bunny Communications WS SNI"
+        - "[4] \U0001F1F3\U0001F1F1 Bunny Communications WS DIRECT"
+        - "[5] \U0001F1E9\U0001F1EA Private Customer WS DIRECT TLS"
+        - "[6] \U0001F1E9\U0001F1EA RCS Technologies FZE LLC WS DIRECT TLS"
+        - "[7] \U0001F1FA\U0001F1F8 MASSIVEGRID LTD WS CDN TLS"
+        - "[8] \U0001F1FA\U0001F1F8 MASSIVEGRID LTD WS DIRECT TLS"
+        - "[9] \U0001F1FA\U0001F1F8 Private Customer WS CDN TLS"
+        - "[10] \U0001F1FA\U0001F1F8 Private Customer WS DIRECT TLS"
+        - "[11] \U0001F1FA\U0001F1F8 UCLOUD TROJAN SNI TLS"
+        - "[12] \U0001F1FA\U0001F1F8 UCLOUD TROJAN DIRECT TLS"
+        - "[13] \U0001F1FA\U0001F1F8 UCLOUD TROJAN SNI TLS"
+        - "[14] \U0001F1FA\U0001F1F8 UCLOUD TROJAN DIRECT TLS"
+        - "[15] \U0001F1FA\U0001F1F8 UCLOUD TROJAN SNI TLS"
+        - "[16] \U0001F1FA\U0001F1F8 UCLOUD TROJAN DIRECT TLS"
+        - "[17] \U0001F1FA\U0001F1F8 UCLOUD TROJAN SNI TLS"
+        - "[18] \U0001F1FA\U0001F1F8 UCLOUD TROJAN DIRECT TLS"
+        - "[19] \U0001F1EB\U0001F1F7 Scaleway WS DIRECT TLS"
+        - "[20] \U0001F1FA\U0001F1F8 OVH US LLC SHADOWSOCKS SNI"
+        - "[21] \U0001F1FA\U0001F1F8 OVH US LLC SHADOWSOCKS DIRECT"
+        - "[22] \U0001F1EE\U0001F1F9 OVH Srl SHADOWSOCKS SNI"
+        - "[23] \U0001F1EE\U0001F1F9 OVH Srl SHADOWSOCKS DIRECT"
+        - "[24] \U0001F1FA\U0001F1F8 OVH US LLC SHADOWSOCKS SNI"
+        - "[25] \U0001F1FA\U0001F1F8 OVH US LLC SHADOWSOCKS DIRECT"
+        - "[26] \U0001F1FA\U0001F1F8 RackNerd LLC TCP DIRECT"
+        - "[27] \U0001F1F5\U0001F1F1 OVH Sp. z o. o. SHADOWSOCKS SNI"
+        - "[28] \U0001F1F5\U0001F1F1 OVH Sp. z o. o. SHADOWSOCKS DIRECT"
+        - "[29] \U0001F1E9\U0001F1EA oneprovider.com - Frankfurt Infrastructure SHADOWSOCKS SNI"
+        - "[30] \U0001F1E9\U0001F1EA oneprovider.com - Frankfurt Infrastructure SHADOWSOCKS DIRECT"
+        - "[31] \U0001F1F3\U0001F1F1 VPN Consumer Amsterdam The Netherlands SHADOWSOCKS SNI"
+        - "[32] \U0001F1F3\U0001F1F1 VPN Consumer Amsterdam The Netherlands SHADOWSOCKS DIRECT"
+        - "[33] \U0001F1FA\U0001F1F8 Vapeline Technology SHADOWSOCKS DIRECT"
+        - "[34] \U0001F1E8\U0001F1E6 OVH Hosting Inc. SHADOWSOCKS SNI"
+        - "[35] \U0001F1E8\U0001F1E6 OVH Hosting Inc. SHADOWSOCKS DIRECT"
+        - "[36] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS SNI"
+        - "[37] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS DIRECT"
+        - "[38] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS SNI"
+        - "[39] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS DIRECT"
+        - "[40] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS SNI"
+        - "[41] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS DIRECT"
+        - "[42] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS SNI"
+        - "[43] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS DIRECT"
+        - "[44] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS SNI"
+        - "[45] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS DIRECT"
+        - "[46] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS SNI"
+        - "[47] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS DIRECT"
+        - "[48] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS SNI"
+        - "[49] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS DIRECT"
+        - "[50] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS SNI"
+      type: select
+    - interval: 300
+      name: AUTO-FALLBACK
+      proxies:
+        - "[1] \U0001F1E9\U0001F1EA AEZA GROUP LLC WS CDN TLS"
+        - "[2] \U0001F1E9\U0001F1EA AEZA GROUP LLC WS DIRECT TLS"
+        - "[3] \U0001F1F3\U0001F1F1 Bunny Communications WS SNI"
+        - "[4] \U0001F1F3\U0001F1F1 Bunny Communications WS DIRECT"
+        - "[5] \U0001F1E9\U0001F1EA Private Customer WS DIRECT TLS"
+        - "[6] \U0001F1E9\U0001F1EA RCS Technologies FZE LLC WS DIRECT TLS"
+        - "[7] \U0001F1FA\U0001F1F8 MASSIVEGRID LTD WS CDN TLS"
+        - "[8] \U0001F1FA\U0001F1F8 MASSIVEGRID LTD WS DIRECT TLS"
+        - "[9] \U0001F1FA\U0001F1F8 Private Customer WS CDN TLS"
+        - "[10] \U0001F1FA\U0001F1F8 Private Customer WS DIRECT TLS"
+        - "[11] \U0001F1FA\U0001F1F8 UCLOUD TROJAN SNI TLS"
+        - "[12] \U0001F1FA\U0001F1F8 UCLOUD TROJAN DIRECT TLS"
+        - "[13] \U0001F1FA\U0001F1F8 UCLOUD TROJAN SNI TLS"
+        - "[14] \U0001F1FA\U0001F1F8 UCLOUD TROJAN DIRECT TLS"
+        - "[15] \U0001F1FA\U0001F1F8 UCLOUD TROJAN SNI TLS"
+        - "[16] \U0001F1FA\U0001F1F8 UCLOUD TROJAN DIRECT TLS"
+        - "[17] \U0001F1FA\U0001F1F8 UCLOUD TROJAN SNI TLS"
+        - "[18] \U0001F1FA\U0001F1F8 UCLOUD TROJAN DIRECT TLS"
+        - "[19] \U0001F1EB\U0001F1F7 Scaleway WS DIRECT TLS"
+        - "[20] \U0001F1FA\U0001F1F8 OVH US LLC SHADOWSOCKS SNI"
+        - "[21] \U0001F1FA\U0001F1F8 OVH US LLC SHADOWSOCKS DIRECT"
+        - "[22] \U0001F1EE\U0001F1F9 OVH Srl SHADOWSOCKS SNI"
+        - "[23] \U0001F1EE\U0001F1F9 OVH Srl SHADOWSOCKS DIRECT"
+        - "[24] \U0001F1FA\U0001F1F8 OVH US LLC SHADOWSOCKS SNI"
+        - "[25] \U0001F1FA\U0001F1F8 OVH US LLC SHADOWSOCKS DIRECT"
+        - "[26] \U0001F1FA\U0001F1F8 RackNerd LLC TCP DIRECT"
+        - "[27] \U0001F1F5\U0001F1F1 OVH Sp. z o. o. SHADOWSOCKS SNI"
+        - "[28] \U0001F1F5\U0001F1F1 OVH Sp. z o. o. SHADOWSOCKS DIRECT"
+        - "[29] \U0001F1E9\U0001F1EA oneprovider.com - Frankfurt Infrastructure SHADOWSOCKS SNI"
+        - "[30] \U0001F1E9\U0001F1EA oneprovider.com - Frankfurt Infrastructure SHADOWSOCKS DIRECT"
+        - "[31] \U0001F1F3\U0001F1F1 VPN Consumer Amsterdam The Netherlands SHADOWSOCKS SNI"
+        - "[32] \U0001F1F3\U0001F1F1 VPN Consumer Amsterdam The Netherlands SHADOWSOCKS DIRECT"
+        - "[33] \U0001F1FA\U0001F1F8 Vapeline Technology SHADOWSOCKS DIRECT"
+        - "[34] \U0001F1E8\U0001F1E6 OVH Hosting Inc. SHADOWSOCKS SNI"
+        - "[35] \U0001F1E8\U0001F1E6 OVH Hosting Inc. SHADOWSOCKS DIRECT"
+        - "[36] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS SNI"
+        - "[37] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS DIRECT"
+        - "[38] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS SNI"
+        - "[39] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS DIRECT"
+        - "[40] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS SNI"
+        - "[41] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS DIRECT"
+        - "[42] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS SNI"
+        - "[43] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS DIRECT"
+        - "[44] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS SNI"
+        - "[45] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS DIRECT"
+        - "[46] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS SNI"
+        - "[47] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS DIRECT"
+        - "[48] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS SNI"
+        - "[49] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS DIRECT"
+        - "[50] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS SNI"
+      tolerance: 50
+      type: url-test
+      url: http://cp.cloudflare.com/generate_204
+    - interval: 300
+      name: LOAD-BALANCE
+      proxies:
+        - "[1] \U0001F1E9\U0001F1EA AEZA GROUP LLC WS CDN TLS"
+        - "[2] \U0001F1E9\U0001F1EA AEZA GROUP LLC WS DIRECT TLS"
+        - "[3] \U0001F1F3\U0001F1F1 Bunny Communications WS SNI"
+        - "[4] \U0001F1F3\U0001F1F1 Bunny Communications WS DIRECT"
+        - "[5] \U0001F1E9\U0001F1EA Private Customer WS DIRECT TLS"
+        - "[6] \U0001F1E9\U0001F1EA RCS Technologies FZE LLC WS DIRECT TLS"
+        - "[7] \U0001F1FA\U0001F1F8 MASSIVEGRID LTD WS CDN TLS"
+        - "[8] \U0001F1FA\U0001F1F8 MASSIVEGRID LTD WS DIRECT TLS"
+        - "[9] \U0001F1FA\U0001F1F8 Private Customer WS CDN TLS"
+        - "[10] \U0001F1FA\U0001F1F8 Private Customer WS DIRECT TLS"
+        - "[11] \U0001F1FA\U0001F1F8 UCLOUD TROJAN SNI TLS"
+        - "[12] \U0001F1FA\U0001F1F8 UCLOUD TROJAN DIRECT TLS"
+        - "[13] \U0001F1FA\U0001F1F8 UCLOUD TROJAN SNI TLS"
+        - "[14] \U0001F1FA\U0001F1F8 UCLOUD TROJAN DIRECT TLS"
+        - "[15] \U0001F1FA\U0001F1F8 UCLOUD TROJAN SNI TLS"
+        - "[16] \U0001F1FA\U0001F1F8 UCLOUD TROJAN DIRECT TLS"
+        - "[17] \U0001F1FA\U0001F1F8 UCLOUD TROJAN SNI TLS"
+        - "[18] \U0001F1FA\U0001F1F8 UCLOUD TROJAN DIRECT TLS"
+        - "[19] \U0001F1EB\U0001F1F7 Scaleway WS DIRECT TLS"
+        - "[20] \U0001F1FA\U0001F1F8 OVH US LLC SHADOWSOCKS SNI"
+        - "[21] \U0001F1FA\U0001F1F8 OVH US LLC SHADOWSOCKS DIRECT"
+        - "[22] \U0001F1EE\U0001F1F9 OVH Srl SHADOWSOCKS SNI"
+        - "[23] \U0001F1EE\U0001F1F9 OVH Srl SHADOWSOCKS DIRECT"
+        - "[24] \U0001F1FA\U0001F1F8 OVH US LLC SHADOWSOCKS SNI"
+        - "[25] \U0001F1FA\U0001F1F8 OVH US LLC SHADOWSOCKS DIRECT"
+        - "[26] \U0001F1FA\U0001F1F8 RackNerd LLC TCP DIRECT"
+        - "[27] \U0001F1F5\U0001F1F1 OVH Sp. z o. o. SHADOWSOCKS SNI"
+        - "[28] \U0001F1F5\U0001F1F1 OVH Sp. z o. o. SHADOWSOCKS DIRECT"
+        - "[29] \U0001F1E9\U0001F1EA oneprovider.com - Frankfurt Infrastructure SHADOWSOCKS SNI"
+        - "[30] \U0001F1E9\U0001F1EA oneprovider.com - Frankfurt Infrastructure SHADOWSOCKS DIRECT"
+        - "[31] \U0001F1F3\U0001F1F1 VPN Consumer Amsterdam The Netherlands SHADOWSOCKS SNI"
+        - "[32] \U0001F1F3\U0001F1F1 VPN Consumer Amsterdam The Netherlands SHADOWSOCKS DIRECT"
+        - "[33] \U0001F1FA\U0001F1F8 Vapeline Technology SHADOWSOCKS DIRECT"
+        - "[34] \U0001F1E8\U0001F1E6 OVH Hosting Inc. SHADOWSOCKS SNI"
+        - "[35] \U0001F1E8\U0001F1E6 OVH Hosting Inc. SHADOWSOCKS DIRECT"
+        - "[36] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS SNI"
+        - "[37] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS DIRECT"
+        - "[38] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS SNI"
+        - "[39] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS DIRECT"
+        - "[40] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS SNI"
+        - "[41] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS DIRECT"
+        - "[42] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS SNI"
+        - "[43] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS DIRECT"
+        - "[44] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS SNI"
+        - "[45] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS DIRECT"
+        - "[46] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS SNI"
+        - "[47] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS DIRECT"
+        - "[48] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS SNI"
+        - "[49] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS DIRECT"
+        - "[50] \U0001F1F3\U0001F1F1 Greenhost BV SHADOWSOCKS SNI"
+      strategy: round-robin
+      type: load-balance
+      url: http://cp.cloudflare.com/generate_204
+rules:
+    - GEOIP,LAN,DIRECT,no-resolve
+    - MATCH,PROXIES
+socks-port: 7891

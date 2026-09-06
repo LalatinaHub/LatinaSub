@@ -1,47 +1,31 @@
-lib-cov
-*.seed
-*.log
-*.csv
-*.dat
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+bin/
+
+# Test binary, built with `go test -c`
+*.test
 *.out
-*.pid
-*.gz
-*.swp
+coverage.*
 
-pids
-logs
-results
-tmp
+# Go workspace file
+go.work
+go.work.sum
 
-# Build
-public/css/main.css
-
-# Coverage reports
-coverage
-
-# API keys and secrets
+# Environment variables
 .env
+.env.*
+!.env.example
 
-# Dependency directory
-node_modules
-bower_components
-
-# Editors
-.idea
-*.iml
-
-# OS metadata
+# OS metadata & Editors
 .DS_Store
 Thumbs.db
+.idea/
+.vscode/
 
-# Ignore built ts files
-dist/**/*
-
-# ignore yarn.lock
-yarn.lock
-
-test*
-sub/
-app/
-bin/
-bot_token
+# Temporary run artifacts
+tmp/
+*.tmp

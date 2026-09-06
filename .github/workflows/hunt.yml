@@ -1,0 +1,85 @@
+name: 🚀 LatinaSub Proxy Hunt
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Run in dry-run mode (do not commit to remote database)"
+        required: false
+        default: "false"
+        type: boolean
+      max_nodes:
+        description: "Maximum number of active nodes to store"
+        required: false
+        default: "500"
+        type: string
+
+concurrency:
+  group: hunt-pipeline
+  cancel-in-progress: false
+
+jobs:
+  hunt:
+    name: Scrape, Verify & Synchronize
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Go Environment
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.24.x"
+          cache: true
+
+      - name: Verify Go Modules
+        run: |
+          go mod download
+          go mod verify
+
+      - name: Compile LatinaSub Executable
+        run: |
+          mkdir -p bin
+          go build -v -tags "with_utls,with_grpc" -ldflags="-s -w" -o bin/latinasub ./cmd/latinasub
+          chmod +x bin/latinasub
+
+      - name: Run Proxy Verification Pipeline
+        env:
+          TURSO_DATABASE_URL: ${{ secrets.TURSO_DATABASE_URL }}
+          TURSO_AUTH_TOKEN: ${{ secrets.TURSO_AUTH_TOKEN }}
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          ADMIN_ID: ${{ secrets.ADMIN_ID }}
+          MAX_NODES: ${{ inputs.max_nodes || vars.MAX_NODES || '500' }}
+          CONCURRENCY_WORKERS: ${{ vars.CONCURRENCY_WORKERS || '50' }}
+          TEST_TIMEOUT_SECONDS: ${{ vars.TEST_TIMEOUT_SECONDS || '5' }}
+          DRY_RUN: ${{ inputs.dry_run || vars.DRY_RUN || 'false' }}
+          BLACKLIST_PATH: "./blacklist.txt"
+          SUBLIST_PATH: "./resources/sublist.json"
+        run: |
+          ./bin/latinasub
+
+      - name: Commit Blacklist & Exported Results
+        if: ${{ always() }}
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Add blacklist and result directory if exists
+          [ -f blacklist.txt ] && git add blacklist.txt
+          [ -d result ] && git add result/
+          
+          # Commit only if changes exist
+          if ! git diff --quiet || ! git diff --staged --quiet; then
+            git commit -m "chore(hunt): update verified proxies & blacklist [skip ci]"
+            git pull --rebase origin main
+            git push origin main
+          else
+            echo "No changes detected to commit."
+          fi
