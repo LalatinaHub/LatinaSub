@@ -5,12 +5,49 @@ import (
 	"encoding/json"
 	"fmt"
 	"strings"
+	"sync"
 
 	"github.com/LalatinaHub/common/model"
 	box "github.com/sagernet/sing-box"
+	"github.com/sagernet/sing-box/adapter"
 	"github.com/sagernet/sing-box/include"
 	"github.com/sagernet/sing-box/option"
 )
+
+var (
+	baseInboundRegistry      adapter.InboundRegistry
+	baseOutboundRegistry     adapter.OutboundRegistry
+	baseEndpointRegistry     adapter.EndpointRegistry
+	baseDNSTransportRegistry adapter.DNSTransportRegistry
+	baseServiceRegistry      adapter.ServiceRegistry
+	boxRegistryOnce          sync.Once
+)
+
+func initBoxRegistries() {
+	boxRegistryOnce.Do(func() {
+		baseInboundRegistry = include.InboundRegistry()
+		baseOutboundRegistry = include.OutboundRegistry()
+		baseEndpointRegistry = include.EndpointRegistry()
+		baseDNSTransportRegistry = include.DNSTransportRegistry()
+		baseServiceRegistry = include.ServiceRegistry()
+	})
+}
+
+func init() {
+	initBoxRegistries()
+}
+
+func newBoxContext(ctx context.Context) context.Context {
+	initBoxRegistries()
+	return box.Context(
+		ctx,
+		baseInboundRegistry,
+		baseOutboundRegistry,
+		baseEndpointRegistry,
+		baseDNSTransportRegistry,
+		baseServiceRegistry,
+	)
+}
 
 // BuildSingboxConfig constructs a pure-Go in-memory sing-box Options configuration
 // tailored for in-process connectivity testing with local mixed inbound and target outbound.
@@ -92,15 +129,7 @@ func BuildSingboxConfig(node *model.ProxyNode, listenPort int, mode Mode, cdnHos
 		return opt, fmt.Errorf("failed to marshal sing-box config map: %w", err)
 	}
 
-	ctx := context.Background()
-	ctx = box.Context(
-		ctx,
-		include.InboundRegistry(),
-		include.OutboundRegistry(),
-		include.EndpointRegistry(),
-		include.DNSTransportRegistry(),
-		include.ServiceRegistry(),
-	)
+	ctx := newBoxContext(context.Background())
 
 	if err := opt.UnmarshalJSONContext(ctx, configBytes); err != nil {
 		return opt, fmt.Errorf("failed to unmarshal sing-box options: %w", err)

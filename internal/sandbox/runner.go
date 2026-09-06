@@ -10,7 +10,6 @@ import (
 
 	"github.com/LalatinaHub/common/probe"
 	box "github.com/sagernet/sing-box"
-	"github.com/sagernet/sing-box/include"
 	"github.com/sagernet/sing-box/option"
 )
 
@@ -40,14 +39,7 @@ func (r *Runner) Run(
 ) (GeoIPResult, int64, *probe.Result, *probe.Result, error) {
 	var geo GeoIPResult
 
-	boxCtx := box.Context(
-		ctx,
-		include.InboundRegistry(),
-		include.OutboundRegistry(),
-		include.EndpointRegistry(),
-		include.DNSTransportRegistry(),
-		include.ServiceRegistry(),
-	)
+	boxCtx := newBoxContext(ctx)
 
 	boxInstance, err := box.New(box.Options{
 		Context: boxCtx,
